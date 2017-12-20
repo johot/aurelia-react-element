@@ -1,3 +1,7 @@
+## Install component
+
+`npm install --save aurelia-react-element`
+
 ## React setup
 
 `npm install --save react react-dom @types/react @types/react-dom`
