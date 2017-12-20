@@ -39,3 +39,38 @@
 // Add this
 "jsx": "react"
 ```
+
+# Usage
+
+```ts
+import { bindable } from "aurelia-framework";
+import ReactElement from "aurelia-react-element";
+import CircularProgressbar from "react-circular-progressbar";
+
+export class ProgressBar extends ReactElement {
+  @bindable props = {};
+  component: any = CircularProgressbar;
+
+  @bindable percentage: number = 0;
+
+  bind() {
+    this.syncProps();
+  }
+
+  syncProps() {
+    this.props = { percentage: this.percentage };
+  }
+
+  percentageChanged(newValue: number, oldValue: number) {
+    this.syncProps();
+  }
+}
+```
+
+```html
+<require from="./progress-bar"></require>
+<progress-bar percentage.two-way="percentCompleted"></progress-bar>
+
+<!-- Or -->
+<progress-bar props.bind="{ percentage: '33' }"></progress-bar>
+```
