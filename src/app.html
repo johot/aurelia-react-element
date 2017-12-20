@@ -1,0 +1,16 @@
+<template>
+  <h1>${message}</h1>
+
+  <require from="./App.css"></require>
+
+  <require from="./sample-component"></require>
+  <sample-component></sample-component>
+
+  <require from="./progress-bar"></require>
+  <div style="width:150px">
+    <progress-bar percentage.two-way="percentCompleted"></progress-bar>
+  </div>
+
+  <button click.delegate="updateProgress()">Update Progress</button>
+
+</template>
