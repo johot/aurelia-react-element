@@ -170,8 +170,10 @@ export class ProgressBar extends ReactElement {
 ### Sample 1
 
 ```html
-<require from="./sample-component"></require>
-<sample-component></sample-component>
+<template>
+   <require from="./sample-component"></require>
+   <sample-component></sample-component>
+</template>
 ```
 
 ### Sample 2
