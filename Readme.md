@@ -99,6 +99,8 @@ export class SampleComponent extends ReactElement {
 }
 ```
 
+Note: No `.html` view is needed.
+
 ### Your React component (sample)
 This file should have a file ending of `tsx` (TypeScript) or `jsx` (JavaScript)
 ```jsx
