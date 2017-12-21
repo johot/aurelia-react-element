@@ -100,7 +100,7 @@ export class SampleComponent extends ReactElement {
 ```
 
 ### Your React component (sample)
-
+This file should have a file ending of `tsx` (TypeScript) or `jsx` (JavaScript)
 ```jsx
 import * as React from "react";
 import { Component } from "react";
