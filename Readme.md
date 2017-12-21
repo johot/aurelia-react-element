@@ -1,4 +1,14 @@
-## Install component
+# Aurelia React Element
+
+Aurelia React Element makes it super easy to use React components inside Aurelia!
+
+You create a new Aurelia custom element, inherit our `ReactElement` base class and import the React component. Now you can simply use it in Aurelia by doing:
+
+```ts
+<WrappedReactComponent props="{ message: 'Hello World'}">
+```
+
+## Installing
 
 `npm install --save aurelia-react-element`
 
