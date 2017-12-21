@@ -177,11 +177,13 @@ export class ProgressBar extends ReactElement {
 ### Sample 2
 
 ```html
-<require from="./progress-bar"></require>
-<progress-bar percentage.two-way="percentCompleted"></progress-bar>
-
-<!-- Or use the props property -->
-<progress-bar props.bind="{ percentage: '33' }"></progress-bar>
+<template>
+  <require from="./progress-bar"></require>
+  <progress-bar percentage.two-way="percentCompleted"></progress-bar>
+  
+  <!-- Or use the props property -->
+  <!-- <progress-bar props.bind="{ percentage: '33' }"></progress-bar> -->
+</template>
 ```
 
 ## More reading
