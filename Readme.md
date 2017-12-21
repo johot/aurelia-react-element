@@ -99,31 +99,6 @@ export class SampleComponent extends ReactElement {
 }
 ```
 
-```ts
-import { bindable } from "aurelia-framework";
-import ReactElement from "aurelia-react-element";
-import CircularProgressbar from "react-circular-progressbar";
-
-export class ProgressBar extends ReactElement {
-  @bindable props = {};
-  component: any = CircularProgressbar;
-
-  @bindable percentage: number = 0;
-
-  bind() {
-    this.syncProps();
-  }
-
-  syncProps() {
-    this.props = { percentage: this.percentage };
-  }
-
-  percentageChanged(newValue: number, oldValue: number) {
-    this.syncProps();
-  }
-}
-```
-
 ### Your React component (sample)
 
 ```jsx
@@ -164,6 +139,32 @@ export default class ReactSampleComponent extends Component<
 ## Wrapping an existing component (from npm)
 
 In this example we are wrapping the `react-circular-progressbar` from npm.
+
+```ts
+import { bindable } from "aurelia-framework";
+import ReactElement from "aurelia-react-element";
+import CircularProgressbar from "react-circular-progressbar";
+
+export class ProgressBar extends ReactElement {
+  @bindable props = {};
+  component: any = CircularProgressbar;
+
+  @bindable percentage: number = 0;
+
+  bind() {
+    this.syncProps();
+  }
+
+  syncProps() {
+    this.props = { percentage: this.percentage };
+  }
+
+  percentageChanged(newValue: number, oldValue: number) {
+    this.syncProps();
+  }
+}
+```
+
 ## Using in Aurelia:
 
 ### Sample 1
