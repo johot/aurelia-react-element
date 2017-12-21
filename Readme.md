@@ -86,6 +86,19 @@ Note samples are made using TypeScript but should be easy to convert to JavaScri
 
 ## Wrapping your own React component
 
+### Your Aurelia custom element
+
+```ts
+import { bindable } from "aurelia-framework";
+import ReactElement from "aurelia-react-element";
+import ReactSampleComponent from "./react-components/react-sample-component";
+
+export class SampleComponent extends ReactElement {
+  props = { message: "Hello from Aurelia!" };
+  component: any = ReactSampleComponent;
+}
+```
+
 ```ts
 import { bindable } from "aurelia-framework";
 import ReactElement from "aurelia-react-element";
@@ -108,23 +121,6 @@ export class ProgressBar extends ReactElement {
   percentageChanged(newValue: number, oldValue: number) {
     this.syncProps();
   }
-}
-```
-
-## Wrapping an existing component (from npm)
-
-In this example we are wrapping the `react-circular-progressbar` from npm.
-
-### Your Aurelia custom element
-
-```ts
-import { bindable } from "aurelia-framework";
-import ReactElement from "aurelia-react-element";
-import ReactSampleComponent from "./react-components/react-sample-component";
-
-export class SampleComponent extends ReactElement {
-  props = { message: "Hello from Aurelia!" };
-  component: any = ReactSampleComponent;
 }
 ```
 
@@ -165,6 +161,9 @@ export default class ReactSampleComponent extends Component<
 }
 ```
 
+## Wrapping an existing component (from npm)
+
+In this example we are wrapping the `react-circular-progressbar` from npm.
 ## Using in Aurelia:
 
 ### Sample 1
