@@ -10,17 +10,24 @@ You create a new Aurelia custom element, inherit our `ReactElement` base class a
 
 ## Installing
 
+### Install aurelia component
+
 `npm install --save aurelia-react-element`
 
-## React setup
+### React setup
 
 `npm install --save react react-dom @types/react @types/react-dom`
 
-## `Aurelia.json` setup
+## Configuring an Aurelia CLI project (`Aurelia.json` etc)
+
+### `Aurelia.json` setup
+
+Example where we are wrapping the react component named `react-circular-progressbar` from npm.
+
+In the `"dependencies":` section in `aurelia.json`.
 
 ```json
-// Insert dependencies
- "react-circular-progressbar",
+"react-circular-progressbar",
 {
     "name": "react",
     "path": "../node_modules/react/umd",
@@ -36,25 +43,65 @@ You create a new Aurelia custom element, inherit our `ReactElement` base class a
     "path": "../node_modules/aurelia-react-element",
     "main": "index"
 },
-
-// Also add tsx here
-"transpiler": {
-    "id": "typescript",
-    "displayName": "TypeScript",
-    "fileExtension": ".ts",
-    "dtsSource": ["./custom_typings/**/*.d.ts"],
-    "source": "src/**/*.{ts,tsx}"
-},
 ```
 
-## `tsconfig.json` setup
+## `tsconfig.json` setup (for TypeScript users)
+
+Add `"jsx": "react"` to your `tsconfig.json`.
+
+Example `tsconfig.json`:
 
 ```json
-// Add this
-"jsx": "react"
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "es5",
+    "module": "amd",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "lib": ["es2017", "dom"],
+    "jsx": "react"
+  },
+  "exclude": ["node_modules", "aurelia_project"],
+  "filesGlob": [
+    "./src/**/*.ts",
+    "./test/**/*.ts",
+    "./custom_typings/**/*.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}
 ```
 
-# Usage
+# Wrapping a React component in an Aurelia custom element
+
+Note samples are made using TypeScript but should be easy to convert to JavaScript.
+
+## Wrapping your own React component
+
+```ts
+import { bindable } from "aurelia-framework";
+import ReactElement from "./library/react-element";
+import ReactSampleComponent from "./react-components/react-sample-component";
+
+export class SampleComponent extends ReactElement {
+  props = { message: "Hello from Aurelia!" };
+  component: any = ReactSampleComponent;
+}
+```
+
+## Wrapping an existing component (from npm)
+
+In this example we are wrapping the `react-circular-progressbar` from npm.
+
+### Your Aurelia custom element
 
 ```ts
 import { bindable } from "aurelia-framework";
@@ -81,10 +128,62 @@ export class ProgressBar extends ReactElement {
 }
 ```
 
+### Your React component (sample)
+
+```jsx
+import * as React from "react";
+import { Component } from "react";
+// import "./App.css";
+
+//const logo = require("./logo.svg");
+
+interface ReactSampleComponentProps {
+  message: string;
+}
+
+export default class ReactSampleComponent extends Component<
+  ReactSampleComponentProps
+> {
+  render() {
+    return (
+      <div className="App">
+        <div className="App-header" style={{ marginBottom: "10px" }}>
+          <img src="img/logo.svg" className="App-logo" alt="logo" />
+          <h2>Welcome to React</h2>
+          <h3>
+            Message from Aurelia: <i>{this.props.message}</i>
+            <br />
+          </h3>
+        </div>
+        <p className="App-intro">
+          To get started, edit
+          <code>src/react-components/sample-component.tsx</code> and save to reload.
+        </p>
+      </div>
+    );
+  }
+}
+```
+
+## Using in Aurelia:
+
+### Sample 1
+
+```html
+<require from="./sample-component"></require>
+<sample-component></sample-component>
+```
+
+### Sample 2
+
 ```html
 <require from="./progress-bar"></require>
 <progress-bar percentage.two-way="percentCompleted"></progress-bar>
 
-<!-- Or -->
+<!-- Or use the props property -->
 <progress-bar props.bind="{ percentage: '33' }"></progress-bar>
 ```
+
+## More reading
+
+Ashley Grant has another great example of using React with Aurelia, read more [here](https://stackoverflow.com/questions/46282448/can-we-integrate-react-component-into-aurelia-project).
