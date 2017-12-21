@@ -88,7 +88,7 @@ Note samples are made using TypeScript but should be easy to convert to JavaScri
 
 ```ts
 import { bindable } from "aurelia-framework";
-import ReactElement from "./library/react-element";
+import ReactElement from "aurelia-react-element";
 import ReactSampleComponent from "./react-components/react-sample-component";
 
 export class SampleComponent extends ReactElement {
